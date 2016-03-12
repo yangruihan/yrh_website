@@ -1,9 +1,70 @@
 {% extends "dailytask/base/base.html" %}
+{% load staticfiles %}
 
 {% block title %}
     首页  
 {% endblock title %}
 
 {% block body %}
-    Hello, World 
+
+    <h1>今日任务</h1>
+    <h3>未完成</h3>
+    <table class="uncompleted_table" id="uncompleted_table">
+        <tr>
+            <th></th>
+            <th>任务编号</th>
+            <th>任务内容</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% if uncompleted_tasks %}
+        {% for uncompleted_task in uncompleted_tasks %}
+        <tr>
+            <td><input type="checkbox" id="checkbox_task_{{ forloop.counter }}" class="checkbox_change_status" name="{{ uncompleted_task.id }}"></td>
+            <td align="center"><label for="input_task_content_{{ forloop.counter }}" id="label_task_{{ forloop.counter }}" class="label_task">{{ forloop.counter }}</label></td>
+            <td><input type="text" id="input_task_content_{{ forloop.counter }}" class="input_task_content" value="{{ uncompleted_task.content }}" name="{{ uncompleted_task.id }}"></td>
+            <td><button id="btn_add_task_{{ forloop.counter }}" class="btn_add_task" name="{{ uncompleted_task.id }}">修改</button><td>
+            <td><button id="btn_delete_task_{{ forloop.counter }}" class="btn_delete_task" name="{{ uncompleted_task.id }}">删除</button></td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td><input type="checkbox" id="checkbox_task_{{ uncompleted_tasks|length|add:"1"}}" class="checkbox_change_status"></td>
+            <td align="center"><label for="input_task_content_{{ uncompleted_tasks|length|add:"1"}}" id="label_task_1" class="label_task">{{ uncompleted_tasks|length|add:"1"}}</label></td>
+            <td><input type="text" id="input_task_content_{{ uncompleted_tasks|length|add:"1"}}" class="input_task_content"></td>
+            <td><button id="btn_add_task_{{ uncompleted_tasks|length|add:"1"}}" class="btn_add_task">增加</button><td>
+            <td><button id="btn_delete_task_{{ uncompleted_tasks|length|add:"1"}}" class="btn_delete_task">删除</button></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td><input type="checkbox" id="checkbox_task_1" class="checkbox_change_status"></td>
+            <td align="center"><label for="input_task_content_1" id="label_task_1" class="label_task">1</label></td>
+            <td><input type="text" id="input_task_content_1" class="input_task_content"></td>
+            <td><button id="btn_add_task_1" class="btn_add_task">增加</button><td>
+            <td><button id="btn_delete_task_1" class="btn_delete_task">删除</button></td>
+        </tr>
+        {% endif %}    
+    </table>
+    <hr>
+    <h3>已完成</h3>
+    <table id="completed_table" class="completed_table">
+        <tr>
+            <th></th>
+            <th>任务编号</th>
+            <th>任务内容</th>
+            <th>完成时间</th>
+        </tr>
+        {% for completed_task in completed_tasks %}
+        <tr>
+            <td><input type="checkbox" id="checkbox_task_{{ completed_task.id }}" class="checkbox_change_status"  name="{{ completed_task.id }}" checked="checked"></td>
+            <td align="center"><label for="label_task_{{ forloop.counter }}" id="label_task">{{ forloop.counter }}</td>
+            <td><div id="div_task_content_{{ forloop.counter }}" class="div_task_content">{{ completed_task.content }}</div></td>
+            <td><div id="div_task_done_date_{{ forloop.counter }}" class="div_task_done_date">{{ completed_task.done_date|date:"Y-m-d H:i:s" }}</div></td>
+        </tr>    
+        {% endfor %}
+    </table>
+
 {% endblock body %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static "dailytask/js/dailytask/index.js" %}"></script>
+{% endblock scripts %}
