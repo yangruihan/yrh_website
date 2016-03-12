@@ -1,0 +1,26 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block title %}{% endblock title %}</title>
+
+    {% block styles %}
+    {% endblock styles %}
+
+    <script type="text/javascript" src="{% static "dailytask/js/jQuery/jquery-1.12.1.min.js" %}"></script>
+
+<body>
+    {% include "dailytask/base/header.html" %}
+
+    {% block body %}
+    {% endblock body %}
+
+    {% include "dailytask/base/footer.html" %}
+</body>
+
+{% block scripts %}
+{% endblock scripts %}
+
+</html>
