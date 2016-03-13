@@ -137,3 +137,9 @@ STATICFILES_DIRS = (
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 SESSION_SAVE_EVERY_REQUEST = True
+
+# 使得 session cookie 被标记上 secure 标记,从而只能传输在 HTTPS 下
+SESSION_COOKIE_SECURE = True 
+
+# 使得 session cookie 被标记上 http only 标记,从而只能被http协议读取,不能被 Javascript 读取
+SESSION_COOKIE_HTTPONLY = True
