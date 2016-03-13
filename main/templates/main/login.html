@@ -1,0 +1,37 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+账号登录
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/login.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="bg_box">
+    <div class="register_box">
+        <h1>账号登录</h1>
+        <form name="registerForm" method="post" action="{% url 'do_login'%} ">
+            {% csrf_token %}
+            <table>
+                <tr align="center">
+                    <td colspan="2"><span class="alert">{{ error_message }}</span></td>
+                </tr>
+                <tr align="center">
+                    <td><label for="username">用户名：</label></td>
+                    <td><input type="text" name="username" id="username" value="{{ username }}"/></td>
+                </tr>
+                <tr align="center">
+                    <td><label for="password">密码：</label></td>
+                    <td><input type="password" name="password" id="password" value=""/></td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2"><input type="submit" value="立即登录" class="submit_btn" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+{% endblock %}

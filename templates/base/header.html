@@ -8,19 +8,38 @@
     <div class="header_left">
         <div class="website_name">Yrh 个人网站</div>
     </div>
+    {% if request.session.logged_in_user %}
+    <div class="header_right">
+        <ul class="header_right_ul">
+            <li class="user">
+                欢迎您，{{ request.session.logged_in_user.username }}
+            </li>
+            <li class="index">
+                <a href="/">首页</a>
+            </li>
+            <li class="login">
+                <a href="#">个人主页</a>
+            </li>
+            <li class="register">
+                <a href="/do_logout">注销</a>
+            </li>
+        </ul>
+    </div>
+    {% else %}
     <div class="header_right">
         <ul class="header_right_ul">
             <li class="index">
                 <a href="/">首页</a>
             </li>
             <li class="login">
-                <a href="#">登录</a>
+                <a href="/login">登录</a>
             </li>
             <li class="register">
-                <a href="#">注册</a>
+                <a href="/register">注册</a>
             </li>
         </ul>
     </div>
+    {% endif %}
 </div>
 <div class="function_header" id="function_header">
     <div class="header_left">

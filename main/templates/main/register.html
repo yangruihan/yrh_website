@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+账号注册
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/register.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'main/js/register.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="bg_box">
+    <div class="register_box">
+        <h1>账号注册</h1>
+        <form name="registerForm" method="post" action="{% url 'do_register' %}">
+            {% csrf_token %}
+            <table>
+                <tr align="center">
+                    <td colspan="2"><span class="alert">{{ error_message }}</span></td>
+                </tr>
+                <tr align="center">
+                    <td><label for="username">用户名：</label></td>
+                    <td><input type="text" name="username" id="username" class="username"/></td>
+                </tr>
+                <tr align="center">
+                    <td><label for="password">设置密码：</label></td>
+                    <td><input type="password" name="password" id="password" class="password"/></td>
+                </tr>
+                <tr align="center">
+                    <td><label for="confirm_password">确认密码：</label></td>
+                    <td><input type="password" name="confirm_password" id="confirm_password" class="confirm_password"/></td>
+                </tr>
+                <tr align="center">
+                    <td><label for="email">邮箱：</label></td>
+                    <td><input type="email" name="email" id="email" class="email"/></td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2"><input type="submit" value="立即注册" class="submit_btn" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+{% endblock %}

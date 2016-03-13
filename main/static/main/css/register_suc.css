@@ -1,0 +1,42 @@
+.bg_box {
+    width:40%;
+    margin: 1em auto;
+    padding-top: 2em;
+    padding-bottom: 4em;
+    background-color: rgb(118, 167, 207);
+}
+
+.bg_box .suc_hint {
+    margin:0 auto;
+    width: 350px;
+}
+
+.bg_box .suc_hint h1 {
+    margin-top: 1em;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+}
+
+.bg_box .suc_hint h2 {
+    width: 100%;
+    color: #fff;
+    text-align: center;
+}
+
+.bg_box .jump_groups {
+    margin-top:10px;
+    text-align:center;
+}
+
+.bg_box .suc_hint ul {
+    list-style: none;
+    overflow:hidden;
+    padding:4px 0;
+    margin:0;
+}
+
+.bg_box .suc_hint li {
+    text-align: center;
+    padding:0;
+}
