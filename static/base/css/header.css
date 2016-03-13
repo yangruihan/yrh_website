@@ -1,0 +1,103 @@
+.website_header {
+    width: 100%;
+    background-color: rgb(70, 130, 180);
+    background-position: center center;
+    background-size: auto auto;
+    color: #fff;
+    padding: 1.5em 1.0em 3.5em 1.0em;
+}
+
+.website_header .header_left {
+    float: left;
+    margin-left: 30px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.website_header .header_right {
+    float: right;
+    margin-right: 30px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.website_header .header_right ul {
+    list-style: none;
+}
+
+.website_header .header_right ul li {
+    float: left;
+    width: auto;
+    margin-left: 10px;
+    line-height: 30px;
+}
+
+.website_header .header_right ul li a:link {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.website_header .header_right ul li a:visited {
+    color: #FFF;
+    text-decoration: underline;
+}
+
+.website_header .header_right ul li a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.website_header .header_right ul li a {
+    display: block;
+    text-align: center;
+    height: 30px;
+}
+
+
+
+.function_header {
+    height: 3em;
+    width: 100%;
+    background-color: rgb(95, 180, 200);
+    background-position: center center;
+    background-size: auto auto;
+    color: #fff;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.function_header .header_left {
+    float: left;
+    vertical-align: center;
+    height: 100%;
+}
+
+.function_header .header_left ul {
+    list-style: none;
+}
+
+.function_header .header_left ul li {
+    float: left;
+    width: auto;
+    margin-left: 30px;
+}
+
+.function_header .header_left ul li a:link {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.function_header .header_left ul li a:visited {
+    color: #FFF;
+    text-decoration: underline;
+}
+
+.function_header .header_left ul li a:hover {
+    text-decoration: underline;
+}
+
+.function_header .header_left ul li a {
+    height: 100%;
+    display: block;
+    text-align: center;
+}

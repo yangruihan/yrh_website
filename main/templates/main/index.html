@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Hello</title>
-</head>
+{% extends "base/base.html" %}
+{% load staticfiles %}
 
-<body>
-    Hello, World!
-</body>
-</html>
+{% block title %}
+    网站首页  
+{% endblock title %}
+
+{% block body %}
+Hello, World!
+{% endblock body %}

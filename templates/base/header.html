@@ -1,2 +1,33 @@
-<h1>Daily Task</h1>
-<hr>
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static "base/css/header.css" %}">
+
+<script type="text/javascript" src="{% static "base/js/header.js" %}"></script>
+
+<div class="website_header" id="website_header">
+    <div class="header_left">
+        <div class="website_name">Yrh 个人网站</div>
+    </div>
+    <div class="header_right">
+        <ul class="header_right_ul">
+            <li class="index">
+                <a href="/">首页</a>
+            </li>
+            <li class="login">
+                <a href="#">登录</a>
+            </li>
+            <li class="register">
+                <a href="#">注册</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="function_header" id="function_header">
+    <div class="header_left">
+        <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="/dailytask/">Daily Task</a></li>
+            <li><a href="#">Tools</a></li>
+        </ul>
+    </div>
+</div>
