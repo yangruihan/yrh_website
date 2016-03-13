@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils import timezone
@@ -18,6 +19,7 @@ def index(request):
         {'uncompleted_tasks': uncompleted_tasks,
          'completed_tasks': completed_tasks})
 
+@csrf_protect
 def add_task(request):
     """
     添加任务到数据库
@@ -31,6 +33,7 @@ def add_task(request):
         print(e)
         return HttpResponse('fail')
 
+@csrf_protect
 def update_task(request):
     """
     修改任务内容
@@ -45,6 +48,7 @@ def update_task(request):
         print(e)
         return HttpResponse('fail')
 
+@csrf_protect
 def delete_task(request):
     """
     删除某条任务
@@ -57,6 +61,7 @@ def delete_task(request):
         print(e)
         return HttpResponse('fail')
 
+@csrf_protect
 def change_task_status(request):
     """
     完成某条任务

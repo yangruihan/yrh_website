@@ -9,18 +9,22 @@
     {% block styles %}
     {% endblock styles %}
 
-    <script type="text/javascript" src="{% static "dailytask/js/jQuery/jquery-1.12.1.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "base/js/jQuery/jquery-1.12.1.min.js" %}"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+        });
+    </script>
 
 <body>
-    {% include "dailytask/base/header.html" %}
+    {% include "base/header.html" %}
 
     {% block body %}
     {% endblock body %}
 
-    {% include "dailytask/base/footer.html" %}
+    {% include "base/footer.html" %}
 </body>
 
-<script type="text/javascript" src="{% static "dailytask/js/dailytask/base/base.js" %}"></script>
 {% block scripts %}
 {% endblock scripts %}
 
