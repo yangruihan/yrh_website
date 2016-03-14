@@ -2,35 +2,36 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
 
-from .models import User
 
-def index(request):
+def index_view(request):
     """
     主页
     """
     return render(request, 'main/index.html')
 
-def register(request):
+def register_view(request):
     """
     注册页面
     """
     return render(request, 'main/register.html')
 
-def register_suc(request):
+def register_suc_view(request):
     """
     注册成功页面
     """
     return render(request, 'main/register_suc.html')
 
 
-def register_fail(request):
+def register_fail_view(request):
     """
     注册失败页面
     """
     return render(request, 'main/register_fail.html')
 
-def username_check(request):
+def username_check_aciton(request):
     """
     用户名检测
     """
@@ -43,7 +44,7 @@ def username_check(request):
     except User.DoesNotExist:
         return HttpResponse("")
 
-def do_register(request):
+def do_register_aciton(request):
     """
     注册
     """
@@ -51,46 +52,57 @@ def do_register(request):
         username = request.POST['username']
         password = request.POST['password']
         email = request.POST['email']
-        user = User(username=username, password=password,
-                    email=email, create_date=timezone.now())
+        user = User.objects.create_user(username=username, email=email, password=password)
         user.save()
-        request.session['logged_in_user'] = user
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                request.session['logged_in_user'] = user
+            else:
+                return HttpResponseRedirect(reverse('register_fail'))
+        else:
+            return HttpResponseRedirect(reverse('register_fail'))
     except KeyError as e:
         print(e)
         return HttpResponseRedirect(reverse('register_fail'))
     else:
         return HttpResponseRedirect(reverse('register_suc'))
 
-def do_logout(request):
+def do_logout_aciton(request):
     """
     用户注销
     """
     try:
         del request.session['logged_in_user']
+        logout(request)
     except KeyError as e:
         print(e)
     return HttpResponseRedirect("/")
 
-def login(request):
+def login_view(request):
     """
     登录页面
     """
     return render(request, 'main/login.html')
 
 
-def do_login(request):
+def do_login_aciton(request):
     """
     登录
     """
-    try:
-        user = User.objects.get(username=request.POST['username'])
-        if user.password == request.POST['password']:
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
             request.session['logged_in_user'] = user
             return HttpResponseRedirect("/")
         else:
             return render(request, 'main/login.html',
                           {'username': user.username,
                            'error_message': "登录失败，用户名或密码错误"})
-    except (KeyError, User.DoesNotExist):
+    else:
         return render(request, 'main/login.html',
                       {'error_message': "登录失败，用户名不存在"})

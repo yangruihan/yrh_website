@@ -2,12 +2,14 @@ from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 import datetime
 
 from .models import Task
 
-def index(request):
+@login_required(login_url='/login')
+def index_view(request):
     """
     主页
     """
@@ -20,7 +22,8 @@ def index(request):
          'completed_tasks': completed_tasks})
 
 @csrf_protect
-def add_task(request):
+@login_required(login_url='/login')
+def add_task_action(request):
     """
     添加任务到数据库
     """
@@ -35,7 +38,8 @@ def add_task(request):
         return HttpResponse('fail')
 
 @csrf_protect
-def update_task(request):
+@login_required(login_url='/login')
+def update_task_action(request):
     """
     修改任务内容
     """
@@ -50,7 +54,8 @@ def update_task(request):
         return HttpResponse('fail')
 
 @csrf_protect
-def delete_task(request):
+@login_required(login_url='/login')
+def delete_task_action(request):
     """
     删除某条任务
     """
@@ -63,7 +68,8 @@ def delete_task(request):
         return HttpResponse('fail')
 
 @csrf_protect
-def change_task_status(request):
+@login_required(login_url='/login')
+def change_task_status_action(request):
     """
     完成某条任务
     """
