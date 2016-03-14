@@ -2,7 +2,8 @@
     margin: 1.5em auto;
     padding-bottom: 2em;
     width: 40%;
-    background-color: #EBF2F8;
+    background-color: #fff;
+    /*background-color: #EBF2F8;*/
     border-radius: 5px;
     box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
 }

@@ -5,6 +5,8 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
 import datetime
+import time
+import json
 
 from .models import Task
 
@@ -88,3 +90,21 @@ def change_task_status_action(request):
     except Exception as e:
         print(e)
         return HttpResponse('fail')
+
+@csrf_protect
+@login_required(login_url='/login')
+def api_get_task_statistics_calendar_data(request):
+    """
+    任务完成情况api
+    """
+    user = request.user
+    # 得到该用户所有已完成任务
+    completed_tasks = Task.objects.filter(user=user).filter(have_completed=True)
+    result = {}
+    for completed_task in completed_tasks:
+        if str(time.mktime(completed_task.done_date.timetuple())) not in completed_tasks:
+            result[str(time.mktime(completed_task.done_date.timetuple()))] = 1
+        else:
+            result[str(time.mktime(completed_task.done_date.timetuple()))] += 1
+    result_json = json.dumps(result)
+    return HttpResponse(result_json, content_type="application/json")

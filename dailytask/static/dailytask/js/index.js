@@ -84,6 +84,20 @@ $(document).ready(function () {
             })
         }
     });
+    
+    var cal = new CalHeatMap();
+    var nowDate = new Date();
+    cal.init({
+    	domain: "month",
+    	subDomain: "day",
+    	cellSize: 9,
+    	range: 12,
+    	data: "http://localhost:8000/dailytask/api/get_task_statistics_calendar_data/",
+    	cellRadius: 1,
+    	domainGutter: 3,
+    	displayLegend: true,
+    	legend: [1, 2, 4, 8],
+    });
 });
 
 
