@@ -58,7 +58,6 @@ def do_register_aciton(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                request.session['logged_in_user'] = user
             else:
                 return HttpResponseRedirect(reverse('register_fail'))
         else:
@@ -74,7 +73,6 @@ def do_logout_aciton(request):
     用户注销
     """
     try:
-        del request.session['logged_in_user']
         logout(request)
     except KeyError as e:
         print(e)
@@ -97,7 +95,6 @@ def do_login_aciton(request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            request.session['logged_in_user'] = user
             return HttpResponseRedirect("/")
         else:
             return render(request, 'main/login.html',

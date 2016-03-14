@@ -25,7 +25,7 @@
                 </tr>
                 <tr align="center">
                     <td><label for="username">用户名：</label></td>
-                    <td><input type="text" name="username" id="username" class="username"/></td>
+                    <td><input type="text" name="username" id="username" class="username" value="{{ request.user.username }}"/></td>
                 </tr>
                 <tr align="center">
                     <td><label for="password">设置密码：</label></td>
@@ -37,7 +37,7 @@
                 </tr>
                 <tr align="center">
                     <td><label for="email">邮箱：</label></td>
-                    <td><input type="email" name="email" id="email" class="email"/></td>
+                    <td><input type="email" name="email" id="email" class="email" value="{{ request.user.email }}"/></td>
                 </tr>
                 <tr align="center">
                     <td colspan="2"><input type="submit" value="立即注册" class="submit_btn" /></td>

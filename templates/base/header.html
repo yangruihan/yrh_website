@@ -8,11 +8,11 @@
     <div class="header_left">
         <div class="website_name">Yrh 个人网站</div>
     </div>
-    {% if request.session.logged_in_user %}
+    {% if request.user.is_active %}
     <div class="header_right">
         <ul class="header_right_ul">
             <li class="user">
-                欢迎您，{{ request.session.logged_in_user.username }}
+                欢迎您，{{ request.user.username }}
             </li>
             <li class="index">
                 <a href="/">首页</a>

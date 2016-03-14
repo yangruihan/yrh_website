@@ -13,10 +13,12 @@ def index_view(request):
     """
     主页
     """
+    user = request.user
     now = timezone.now()
-    start = now - datetime.timedelta(hours=23, minutes=59, seconds=59)
-    uncompleted_tasks = Task.objects.filter(create_date__gt=start).filter(have_completed=False)
-    completed_tasks = Task.objects.filter(done_date__gt=start).filter(have_completed=True)
+    create_date_where = ["Month(create_date)='%s'" % now.month, "Day(create_date)='%s'" % now.day]
+    done_date_where = ["Month(done_date)='%s'" % now.month, "Day(done_date)='%s'" % now.day]
+    uncompleted_tasks = Task.objects.filter(user=user).filter(have_completed=False).extra(where=create_date_where)
+    completed_tasks = Task.objects.filter(user=user).filter(have_completed=True).extra(where=done_date_where)
     return render(request, 'dailytask/index.html', 
         {'uncompleted_tasks': uncompleted_tasks,
          'completed_tasks': completed_tasks})
@@ -28,7 +30,7 @@ def add_task_action(request):
     添加任务到数据库
     """
     try:
-        user = request.session['logged_in_user']
+        user = request.user
         task_content = request.POST["content"]
         task = Task(user=user, content=task_content)
         task.save()

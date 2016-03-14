@@ -13,7 +13,7 @@
 <div class="bg_box">
     <div class="register_suc_logo">注册成功</div>
     <div class="suc_hint">
-        <h2>欢迎您，{{ request.session.logged_in_user.username }}</h2>
+        <h2>欢迎您，{{ request.user.username }}</h2>
         <div class="jump_groups">
             <ul>
                 <li><a href="/">返回首页</a></li>
