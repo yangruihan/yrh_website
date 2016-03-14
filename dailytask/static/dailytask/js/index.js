@@ -97,6 +97,10 @@ $(document).ready(function () {
     	domainGutter: 3,
     	displayLegend: true,
     	legend: [1, 2, 4, 8],
+    	tooltip: true,
+    	onClick: function(date, number) {
+    		
+    	},
     });
 });
 
