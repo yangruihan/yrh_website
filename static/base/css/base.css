@@ -1,7 +1,8 @@
 body {
-    height:100%
+    height:100%;
     font-size: 100%;
-    background: #eeeeee;
+    /*background: #eeeeee;*/
+    background: #e1e1e1;
     line-height: 1.3;
     font-family: arial,verdana,sans-serif, '新宋体'; 
     margin: 0;

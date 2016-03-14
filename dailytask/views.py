@@ -25,8 +25,9 @@ def add_task(request):
     添加任务到数据库
     """
     try:
+        user = request.session['logged_in_user']
         task_content = request.POST["content"]
-        task = Task(content=task_content)
+        task = Task(user=user, content=task_content)
         task.save()
         return HttpResponse(task.id)
     except Exception as e:

@@ -15,8 +15,8 @@
 
 {% block body %}
 <div class="bg_box">
+    <div class="register_logo">账号注册</div>
     <div class="register_box">
-        <h1>账号注册</h1>
         <form name="registerForm" method="post" action="{% url 'do_register' %}">
             {% csrf_token %}
             <table>

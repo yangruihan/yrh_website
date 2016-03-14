@@ -23,7 +23,7 @@ $(document).ready(function () {
                             '<td><input type="checkbox" id="checkbox_task_' + (num + 1) + '" class="checkbox_change_status"></input></td>' + 
                             '<td align="center"><label for="input_task_content_' + (num + 1) + '" id="label_task_' + (num + 1) + '" class="label_task">' + (num + 1) + '</label></td>' +
                             '<td><input type="text" value="" id="input_task_content_' + (num + 1) + '" class="input_task_content"></input></td>' +
-                            '<td><button id="btn_add_task_' + (num + 1) + '" class="btn_add_task">增加</button><td>' +
+                            '<td><button id="btn_add_task_' + (num + 1) + '" class="btn_add_task">增加</button></td>' +
                             '<td><button id="btn_delete_task_' + (num + 1) + '" class="btn_delete_task">删除</button></td>'
                         '</tr>';
                         $('#uncompleted_table').append(next_tr);     

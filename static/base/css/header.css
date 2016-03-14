@@ -1,4 +1,5 @@
 .website_header {
+    box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
     width: 100%;
     background-color: rgb(70, 130, 180);
     background-position: center center;
@@ -56,6 +57,7 @@
 
 
 .function_header {
+    box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
     height: 3em;
     width: 100%;
     background-color: rgb(95, 180, 200);

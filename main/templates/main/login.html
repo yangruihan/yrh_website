@@ -11,9 +11,9 @@
 
 {% block body %}
 <div class="bg_box">
-    <div class="register_box">
-        <h1>账号登录</h1>
-        <form name="registerForm" method="post" action="{% url 'do_login'%} ">
+    <div class="login_logo">账号登录</div>
+    <div class="login_box">
+        <form name="loginForm" method="post" action="{% url 'do_login'%} ">
             {% csrf_token %}
             <table>
                 <tr align="center">

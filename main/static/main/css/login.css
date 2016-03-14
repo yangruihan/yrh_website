@@ -1,18 +1,28 @@
 .bg_box {
-    width:40%;
-    margin: 1em auto;
-    padding-top: 2em;
-    padding-bottom: 4em;
-    background-color: rgb(118, 167, 207);
+    margin: 1.5em auto;
+    padding-bottom: 2em;
+    width: 40%;
+    background-color: #EBF2F8;
+    border-radius: 5px;
+    box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
 }
 
-.bg_box .register_box {
+.bg_box .login_logo {
+    border-radius: 5px 5px 0 0;
+    font-size: 20px;
+    background-color: #3AA6C1;
+    padding: 1em;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.bg_box .login_box {
     margin:0 auto;
     width: 350px;
 }
 
-.bg_box .register_box td {
-    color: #fff;
+.bg_box .login_box td {
+    color: #4683A7;
     font-size: 17px;
 }
 
@@ -21,43 +31,37 @@
     line-height: 3.5;
 }
 
-.bg_box h1 {
-    margin-top: 1em;
-    color: #fff;
-    text-align: center;
-}
-
 .bg_box input {
-    width: 90%;
-    background-color: #fff;
+    width: 100%;
+    border-bottom: 1px solid #B4AFAF;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    background-color: transparent;
 }
 
 .bg_box .submit_btn {
-    margin-top: 1.5em;
+    margin-top: 1.0em;
     display: block;
-    width: 200px;
-    height: 55px; 
-    line-height: 52px; 
+    width: 150px;
+    height: 45px; 
+    /*line-height: 52px; */
     text-align: center; 
     font-family: arial,verdana,sans-serif, '新宋体'; 
     font-weight: bold; 
     font-size: 18px; 
-    background: #428bca;
+    background: #09A3DC;
     color: #fff; 
     text-decoration: none; 
-    border: 3px solid #357ebd; 
+    /*border: 3px solid #357ebd; */
+    border-radius: 5px;
     cursor: pointer
 }
 
 .bg_box .submit_btn:hover {
-    background: #1165ae;
+    background: #1286B2;
 }
 
 .bg_box .submit_btn:active {
     background: #0d79d5;
-}
-
-.bg_box span {
-    color: #f00;
-    font-size: 16px;
 }
