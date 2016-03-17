@@ -13,5 +13,9 @@ urlpatterns = [
     url(r'^api/get_last_year_to_now_date_string/$', views.api_get_last_year_to_now_date_string, name='api_get_last_year_to_now_date_string'),
     url(r'^api/get_longest_streak_days_number/$', views.api_get_longest_streak_days_number, name='api_get_longest_streak_days_number'),
     url(r'^api/get_current_streak_days_number/$', views.api_get_current_streak_days_number, name='api_get_current_streak_days_number'),
+    url(r'^api/get_completed_tasks_status/week/$', views.api_get_completed_tasks_status_week, name='api_get_completed_tasks_status_week'),
+    url(r'^api/get_completed_tasks_status/day/$', views.api_get_completed_tasks_status_day, name='api_get_completed_tasks_status_day'),
+    url(r'^api/get_completed_tasks_status/3day/$', views.api_get_completed_tasks_status_3day, name='api_get_completed_tasks_status_3day'),
+    url(r'^api/get_completed_tasks_status/month/$', views.api_get_completed_tasks_status_month, name='api_get_completed_tasks_status_month'),
     
 ]

@@ -85,6 +85,7 @@ $(document).ready(function () {
         }
     });
     
+    // ----------------- Cal HeatMap -----------------
     var cal = new CalHeatMap();
     var nowDate = new Date();
     var lastYearDate = new Date();
@@ -104,7 +105,9 @@ $(document).ready(function () {
     	itemName: ["task completed", "tasks completed"],
     	tooltip: true,
     	onClick: function(date, number) {
-    		
+    		alert(date.getFullYear());
+    		alert(date.getMonth() + 1);
+    		alert(date.getDate());
     	},
     });
     
@@ -124,6 +127,57 @@ $(document).ready(function () {
     	$('.during_date_string').each(function() {
     		$(this).html(result_json.during_date_string);
     	});
+    });
+    
+    // ----------------- Drop Down -----------------
+    function DropDown(el) {
+        this.dd = el;
+        this.initEvents();
+    }
+
+    DropDown.prototype = {
+        initEvents : function() {
+            var obj = this;
+
+            obj.dd.on('click', function(event){
+                $(this).toggleClass('active');
+                event.stopPropagation();
+            }); 
+        }
+    }
+    
+    var dd = new DropDown( $('#task_statistics_detail_dd') );
+
+    $(document).click(function() {
+        $('.task_statistics_detail_dd').removeClass('active');
+    });
+    
+    $("#task_statistics_detail_dropdown li").click(function() {
+    	$("#task_statistics_detail_tasks").children(".task_statistics_detail_task").remove();
+    	
+    	$(".dropdown_show").html($(this).children(".dropdown_link").html());
+    	
+    	$.getJSON("/dailytask/api/get_completed_tasks_status/" + $(this).attr('value') + "/", function (result_json) {
+    		var length = 0;
+	    	for (var task in result_json) {
+	    		length ++;
+	    		next_task = "<div class=\"task_statistics_detail_task\">" +
+	    						result_json[task] + "<span class=\"completed_time\">" + task + "</span></div>";
+	    		$("#task_statistics_detail_tasks").append(next_task);
+	    	}
+	    	$("#task_statistics_detail_number").html("共完成 " + length + " 项任务");
+	    });
+    });
+    
+    $.getJSON("/dailytask/api/get_completed_tasks_status/week/", function (result_json) {
+    	var length = 0;
+    	for (var task in result_json) {
+    		length ++;
+    		next_task = "<div class=\"task_statistics_detail_task\">" +
+    						result_json[task] + "<span class=\"completed_time\">" + task + "</span></div>";
+    		$("#task_statistics_detail_tasks").append(next_task);
+    	}
+    	$("#task_statistics_detail_number").html("共完成 " + length + " 项任务");
     });
 });
 

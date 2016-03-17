@@ -6,8 +6,9 @@
 {% endblock title %}
 
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'dailytask/css/index.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static "base/css/cal_heatmap/cal-heatmap.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "dailytask/css/wrapper_dropdown/wrapper_dropdown_style.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "dailytask/css/index.css" %}">
 {% endblock %}
 
 {% block body %}
@@ -75,10 +76,12 @@
 	
 	<div class="task_statistics">
 		<div class="task_statistics_logo">任务统计</div>
+		
 		<div class="task_statistics_calendar">
 			<div id="cal-heatmap">
 			</div>
 		</div>
+		
 		<div class="task_statistics_data">
 			<div class="completed_tasks_num_last_year">
 				<span class="text-muted">一年内完成的任务数</span>
@@ -97,12 +100,31 @@
 			</div>
 		</div>
 		
+		<div class="task_statistics_detail">
+			<div class="task_statistics_detail_logo">任务完成情况</div>
+			<div class="task_statistics_detail_wrapper">
+				<div id="task_statistics_detail_dd" class="task_statistics_detail_dd" tabindex="1">
+					<span class="dropdown_show">一周内</span>
+					<ul class="dropdown" id="task_statistics_detail_dropdown">
+						<li value="day"><a href="javascript:void(0)" class="dropdown_link">一天内</a></li>
+						<li value="3day"><a href="javascript:void(0)" class="dropdown_link">三天内</a></li>
+						<li value="week"><a href="javascript:void(0)" class="dropdown_link">一周内</a></li>
+						<li value="month"><a href="javascript:void(0)" class="dropdown_link">一月内</a></li>
+					</ul>
+				</div>
+			</div>
+		
+			<div class="task_statistics_detail_tasks" id="task_statistics_detail_tasks">
+				<div class="task_statistics_detail_number" id="task_statistics_detail_number">共完成 0 项任务</div>
+			</div>
+		</div>
 	</div>
 </div>
 {% endblock body %}
 
 {% block scripts %}
-<script type="text/javascript" src="{% static "dailytask/js/index.js" %}"></script>
 <script type="text/javascript" src="{% static "base/js/d3/d3.min.js" %}"></script>
 <script type="text/javascript" src="{% static "base/js/cal_heatmap/cal-heatmap.min.js" %}"></script>
+<script type="text/javascript" src="{% static "dailytask/js/wrapper_dropdown/wrapper_dropdown.js" %}"></script>
+<script type="text/javascript" src="{% static "dailytask/js/index.js" %}"></script>
 {% endblock scripts %}

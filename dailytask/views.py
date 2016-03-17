@@ -7,8 +7,10 @@ from django.contrib.auth.decorators import login_required
 import datetime
 import time
 import json
+from collections import OrderedDict
 
 from .models import Task
+from calendar import month
 
 @login_required(login_url='/login')
 def index_view(request):
@@ -203,3 +205,51 @@ def api_get_current_streak_days_number(request):
     result['current_streak_days_number'] = now_days
     result_json = json.dumps(result)
     return HttpResponse(result_json, content_type="application/json")
+
+def get_completed_tasks_status(key, user):
+    """
+    获得完成任务情况
+    key == 'week' 表示获得一周内完成情况
+    key == 'month' 表示获得一个月内完成情况
+    key == 'day' 表示一天内完成情况
+    key == '3day' 表示3天内完成情况
+    """
+    now_date = timezone.now()
+    if key == 'week':
+        last_date = now_date - datetime.timedelta(days=7)
+    elif key == 'day':
+        last_date = now_date - datetime.timedelta(days=1)
+    elif key == '3day':
+        last_date = now_date - datetime.timedelta(days=3)
+    elif key == 'month':
+        last_date = now_date - datetime.timedelta(days=30)
+        
+    completed_tasks_num_last_week = Task.objects.filter(user=user,
+                                                        have_completed=True, 
+                                                        done_date__gte=last_date,
+                                                        done_date__lte=now_date)
+    result = OrderedDict()
+    for task in completed_tasks_num_last_week:
+        result[str(timezone.localtime(task.done_date)).split('+')[0]] = task.content
+        
+    result_json = json.dumps(result)
+    return result_json
+    
+@login_required(login_url='/login')
+def api_get_completed_tasks_status_week(request):
+    return HttpResponse(get_completed_tasks_status('week', request.user), content_type="application/json")
+
+@login_required(login_url='/login')
+def api_get_completed_tasks_status_day(request):
+    return HttpResponse(get_completed_tasks_status('day', request.user), content_type="application/json")
+
+@login_required(login_url='/login')
+def api_get_completed_tasks_status_3day(request):
+    return HttpResponse(get_completed_tasks_status('3day', request.user), content_type="application/json")
+
+@login_required(login_url='/login')
+def api_get_completed_tasks_status_month(request):
+    return HttpResponse(get_completed_tasks_status('month', request.user), content_type="application/json")
+
+
+
