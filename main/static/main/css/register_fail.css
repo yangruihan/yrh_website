@@ -1,0 +1,46 @@
+.bg_box {
+    margin: 1.5em auto;
+    padding-bottom: 2em;
+    width: 40%;
+    background-color: #fff;
+    /*background-color: #EBF2F8;*/
+    border-radius: 5px;
+    box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
+}
+
+.bg_box .register_fail_logo {
+    border-radius: 5px 5px 0 0;
+    font-size: 20px;
+    background-color: #3AA6C1;
+    padding: 1em;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.bg_box .fail_hint {
+    margin:0 auto;
+    width: 350px;
+}
+
+.bg_box .fail_hint h2 {
+    width: 100%;
+    color: #4683A7;
+    text-align: center;
+}
+
+.bg_box .jump_groups {
+    margin-top:10px;
+    text-align:center;
+}
+
+.bg_box .fail_hint ul {
+    list-style: none;
+    overflow:hidden;
+    padding:4px 0;
+    margin:0;
+}
+
+.bg_box .fail_hint li {
+    text-align: center;
+    padding:0;
+}

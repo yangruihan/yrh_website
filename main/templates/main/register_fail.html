@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+注册失败
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/register_fail.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="bg_box">
+    <div class="register_fail_logo">注册失败</div>
+    <div class="fail_hint">
+        <h2>抱歉，由于系统故障导致您的注册没有成功，请重试</h2>
+        <div class="jump_groups">
+            <ul>
+                <li><a href="/register">再试一次</a></li>
+                <li><a href="/">返回首页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

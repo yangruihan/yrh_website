@@ -92,12 +92,12 @@ $(document).ready(function () {
     	subDomain: "day",
     	cellSize: 9,
     	range: 12,
-    	data: "http://localhost:8000/dailytask/api/get_task_statistics_calendar_data/",
+    	data: "http://127.0.0.1:8000/dailytask/api/get_task_statistics_calendar_data/",
     	cellRadius: 1,
     	domainGutter: 3,
     	displayLegend: true,
     	legend: [1, 2, 4, 8],
-    	itemName: ["task", "tasks"],
+    	itemName: ["task completed", "tasks completed"],
     	tooltip: true,
     	onClick: function(date, number) {
     		
