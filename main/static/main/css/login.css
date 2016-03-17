@@ -66,3 +66,7 @@
 .bg_box .submit_btn:active {
     background: #0d79d5;
 }
+
+.bg_box span.alert {
+    color: #f00;
+}

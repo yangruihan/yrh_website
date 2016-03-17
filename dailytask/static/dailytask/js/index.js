@@ -87,11 +87,15 @@ $(document).ready(function () {
     
     var cal = new CalHeatMap();
     var nowDate = new Date();
+    var lastYearDate = new Date();
+    lastYearDate.setDate(nowDate.getDate() - 335);
+    
     cal.init({
     	domain: "month",
     	subDomain: "day",
     	cellSize: 9,
     	range: 12,
+    	start: lastYearDate,
     	data: "http://127.0.0.1:8000/dailytask/api/get_task_statistics_calendar_data/",
     	cellRadius: 1,
     	domainGutter: 3,
@@ -102,6 +106,24 @@ $(document).ready(function () {
     	onClick: function(date, number) {
     		
     	},
+    });
+    
+    $.getJSON("api/get_completed_tasks_num_last_year/", function (result_json) {
+    	$('.completed_tasks_number').html(result_json.completed_tasks_num_last_year + "项");
+    });
+    
+    $.getJSON("api/get_longest_streak_days_number/", function (result_json) {
+    	$('.longest_streak_days_number').html(result_json.longest_streak_days_number + "天");
+    });
+    
+    $.getJSON("api/get_current_streak_days_number/", function (result_json) {
+    	$('.current_streak_days_number').html(result_json.current_streak_days_number + "天");
+    });
+    
+    $.getJSON("/dailytask/api/get_last_year_to_now_date_string/", function (result_json) {
+    	$('.during_date_string').each(function() {
+    		$(this).html(result_json.during_date_string);
+    	});
     });
 });
 

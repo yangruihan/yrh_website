@@ -145,3 +145,21 @@
 	line-height: 1.3em;
 	color: #333;
 }
+
+.task_statistics .task_statistics_data .longest_streak_days_number {
+	display: block;
+	font-size: 28px;
+	width: 100%;
+	text-align: center;
+	line-height: 1.3em;
+	color: #333;
+}
+
+.task_statistics .task_statistics_data .current_streak_days_number {
+	display: block;
+	font-size: 28px;
+	width: 100%;
+	text-align: center;
+	line-height: 1.3em;
+	color: #333;
+}
