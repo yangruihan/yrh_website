@@ -81,7 +81,7 @@ $(document).ready(function () {
                 } else {
                     alert("任务重置失败");
                 }
-            })
+            });
         }
     });
     
@@ -105,9 +105,30 @@ $(document).ready(function () {
     	itemName: ["task completed", "tasks completed"],
     	tooltip: true,
     	onClick: function(date, number) {
-    		alert(date.getFullYear());
-    		alert(date.getMonth() + 1);
-    		alert(date.getDate());
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+
+            $.post("api/get_completed_tasks_status_special_day", 
+                   {'year': year, 
+                    'month': month,
+                    'day': day }, 
+                    function (result_json) {
+                        if (result_json) {
+                            $("#task_statistics_detail_tasks").children(".task_statistics_detail_task").remove();
+        
+                            $(".dropdown_show").html(year + '-' + month + '-' + day);
+
+                            var length = 0;
+                            for (var task in result_json) {
+                                length ++;
+                                next_task = "<div class=\"task_statistics_detail_task\">" +
+                                                result_json[task] + "<span class=\"completed_time\">" + task + "</span></div>";
+                                $("#task_statistics_detail_tasks").append(next_task);
+                            }
+                            $("#task_statistics_detail_number").html("共完成 " + length + " 项任务");
+                        }
+                    });
     	},
     });
     

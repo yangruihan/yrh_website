@@ -251,5 +251,25 @@ def api_get_completed_tasks_status_3day(request):
 def api_get_completed_tasks_status_month(request):
     return HttpResponse(get_completed_tasks_status('month', request.user), content_type="application/json")
 
+@csrf_protect
+@login_required(login_url='/login')
+def api_get_completed_tasks_status_special_day(request):
+    user = request.user
+    year = request.POST['year']
+    month = request.POST['month']
+    day = request.POST['day']
+    from_date = datetime.datetime(int(year), int(month), int(day))
+    to_date = datetime.datetime(int(year), int(month), int(day) + 1)
+    completed_tasks_num_last_week = Task.objects.filter(user=user,
+                                                        have_completed=True, 
+                                                        done_date__gte=from_date,
+                                                        done_date__lte=to_date)
+    result = OrderedDict()
+    for task in completed_tasks_num_last_week:
+        result[str(timezone.localtime(task.done_date)).split('+')[0]] = task.content
+    
+    print(result)
 
+    result_json = json.dumps(result)
+    return HttpResponse(result_json, content_type="application/json")
 

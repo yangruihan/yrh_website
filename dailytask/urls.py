@@ -17,5 +17,6 @@ urlpatterns = [
     url(r'^api/get_completed_tasks_status/day/$', views.api_get_completed_tasks_status_day, name='api_get_completed_tasks_status_day'),
     url(r'^api/get_completed_tasks_status/3day/$', views.api_get_completed_tasks_status_3day, name='api_get_completed_tasks_status_3day'),
     url(r'^api/get_completed_tasks_status/month/$', views.api_get_completed_tasks_status_month, name='api_get_completed_tasks_status_month'),
+    url(r'^api/get_completed_tasks_status_special_day$', views.api_get_completed_tasks_status_special_day, name='api_get_completed_tasks_status_special_day'),
     
 ]
