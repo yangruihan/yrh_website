@@ -268,8 +268,6 @@ def api_get_completed_tasks_status_special_day(request):
     for task in completed_tasks_num_last_week:
         result[str(timezone.localtime(task.done_date)).split('+')[0]] = task.content
     
-    print(result)
-
     result_json = json.dumps(result)
     return HttpResponse(result_json, content_type="application/json")
 

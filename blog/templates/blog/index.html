@@ -5,6 +5,51 @@
     我的博客
 {% endblock title %}
 
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static "blog/css/index.css" %}">
+{% endblock %}
+
 {% block body %}
-    博客首页
+<div class="blog_content">
+	<div class="myblogs">
+		<div class="myblogs_logo">我的博文</div>
+		<div class="myblogs_container">
+			{% if articles %}
+				{% for article in articles %}
+					<section class="myblog_content">
+						<a href="{% url "article_detail"  article.id %}">
+							<h1 class="myblog_title">{{ article.title }}</h1>
+							<p class="myblog_category">{{ article.category.category_name }}</p>
+							<time class="myblog_create_date" datetime="{{ article.date_time | date:"Y-m-d" }}">{{ article.date_time | date:"Y-m-d" }}</time>
+						</a>
+					</section>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+	
+	<div class="blog_filter">
+		<div class="blog_filter_logo">分类|标签</div>
+		<div class="blog_filter_category">
+			<div class="filter_category_logo filter_logo">分类</div>
+			<div class="blog_categories">
+				{% if category_counter %}
+					{% for category, counter in category_counter.items %}
+						<div class="blog_category_name"><a href="#"%}">{{ category }}<sup>{{ counter }}</sup></a></div>
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+		<div class="blog_filter_tag">
+			<div class="filter_tag_logo filter_logo">标签</div>
+			<ul class="tag_clearfix">
+				{% if tag_counter %}
+					{% for tag, counter in tag_counter.items %}
+						<li><a href="#">{{ tag }}<sup>{{ counter }}</sup></a></li>
+					{% endfor %}
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
 {% endblock body %}
