@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('main.urls')),
     url(r'^dailytask/', include('dailytask.urls')),
+    url(r'^blog/', include('blog.urls')),
 ]
