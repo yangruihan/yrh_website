@@ -7,6 +7,7 @@ class Tag(models.Model):
     博文标签类
     """
     tag_name = models.CharField(max_length=64)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # 博主
 
     def __unicode__(self):
         return self.tag_name
@@ -20,6 +21,7 @@ class Category(models.Model):
     博文分类
     """
     category_name = models.CharField(max_length=64)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # 博主
 
     def __unicode__(self):
         return self.category_name

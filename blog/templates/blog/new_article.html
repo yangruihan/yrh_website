@@ -1,0 +1,107 @@
+{% extends "blog/base/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+   新建博文
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static "blog/css/new_article.css" %}">
+{% endblock %}
+
+{% block left_part %}
+<div class="article">
+	<div class="article_title">
+		<div class="article_logo">新建博文</div>
+	</div>
+	
+	<form action="/blog/do_create_article" method="post" id="new_article_form">
+		<div class="new_article_content">
+			<div class="bs">
+				<style scoped>
+					@import "{% static "bootstrap/css/bootstrap.min.css" %}"
+				</style>
+				
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">标题</span>
+					<input type="text" class="form-control" aria-describedby="basic-addon1" name="title">
+				</div>
+				
+				<div class="btn-group">
+			       	<button type="button" class="btn btn-default" id="article_category">文章分类</button>
+			       	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			       		<span class="caret"></span>
+			       		<span class="sr-only">Toggle Dropdown</span>
+			       	</button>
+			       	<ul class="dropdown-menu" id="article_category_dropdown">
+			       		{% for category, counter in category_counter.items %}
+			       			<li value="{{ category.id }}" name="{{ category }}"><a href="#">{{ category }}</a></li>
+			       		{% endfor %}
+		     		</ul>
+			   	</div>
+			   	
+			   	<button type="button" class="btn btn-default" id="new_category" data-toggle="modal"  data-target="#new_category_modal">新建分类</button>
+			   	<div class="alert alert-success" role="alert" hidden="true" id="new_category_suc_message"></div>
+			   	<div class="alert alert-danger" role="alert" hidden="true" id="new_category_error_message"></div>
+			   	
+			   	<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">标签</span>
+					<input type="text" class="form-control" aria-describedby="basic-addon1" name="tag" placeholder="每个标签之间用英文 ' ; ' 分隔">
+				</div>
+				
+				<div class="article_content_area">
+					<style scoped>
+						@import "//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
+					</style>
+					<textarea class="article_content" id="article_content" name="article_content"></textarea>
+				</div>
+											
+				<button type="button" class="btn btn-primary" id="btn_submit">提 交 </button>
+				
+				<button type="button" class="btn btn-danger" id="btn_cancel">取 消</button>
+				
+				<!-- 模态框（Modal） -->
+				<div class="modal fade" id="new_category_modal" tabindex="-1" role="dialog" 
+				   aria-labelledby="myModalLabel" aria-hidden="true">
+				   <div class="modal-dialog">
+				      <div class="modal-content">
+				         <div class="modal-header">
+				            <button type="button" class="close" 
+				               data-dismiss="modal" aria-hidden="true">
+				                  &times;
+				            </button>
+				            <h4 class="modal-title" id="myModalLabel">
+				               	新建分类
+				            </h4>
+				         </div>
+				         <div class="modal-body">
+				         	<div class="alert alert-danger" role="alert" hidden="true" id="new_category_modal_error_message"></div>
+				            <div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">分类名</span>
+								<input type="text" class="form-control" aria-describedby="basic-addon1" id="new_category_name">
+							 </div>
+				         </div>
+				         <div class="modal-footer">
+				            <button type="button" class="btn btn-danger" 
+				               data-dismiss="modal">关闭
+				            </button>
+				            <button type="button" class="btn btn-primary" id="btn_new_category">
+				               	提交更改
+				            </button>
+				         </div>
+				      </div>
+				    </div>
+				</div><!-- end modal -->
+				
+	    	</div><!-- end bs -->
+	    	
+		</div><!-- end new_article_content -->
+	</form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+<script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script type="text/javascript" src="{% static "blog/js/new_article.js" %}"></script>
+{% endblock scripts %}

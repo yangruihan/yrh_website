@@ -1,0 +1,38 @@
+.article {
+	float: left;
+    width: 70%;
+    padding-bottom: 2em;
+    background-color: #fff;
+    /*background-color: #EBF2F8;*/
+    border-radius: 5px;
+    box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
+}
+
+.article .article_title {
+    border-radius: 5px 5px 0 0;
+    font-size: 20px;
+    background-color: #3AA6C1;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 2em;
+    color: #fff;
+    display:block;
+}
+
+.article .article_title .article_logo {
+    float: left;
+    display:block;
+}
+
+.article .new_article_content {
+	margin: 1em;
+}
+
+.btn-group {
+	margin: 1em 0;
+}
+
+.new_article_content .article_content_area {
+	margin-top: 1em;
+}
