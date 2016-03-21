@@ -1,0 +1,49 @@
+{% extends "blog/base/base.html" %}
+{% load staticfiles %}
+{% load custom_markdown %}
+
+{% block title %}
+   {{ article.title }}
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static "blog/css/article_detail.css" %}">
+{% endblock %}
+
+{% block left_part %}
+<div class="article">
+	<div class="article_title">
+		<div class="article_logo">{{ article.title }}</div>
+	</div>
+	
+	<div class="article_category_tag_time">
+		<div class="article_category row">分类：
+			{% if category_counter %}
+				{% for category, counter in category_counter.items %}
+					{% if category.category_name = article.category.category_name %}
+						<a href="/blog/articles/category/{{ category.id }}">{{ category }}<sup>{{ counter }}</sup></a>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</div>
+		
+		<div class="article_tag row">标签：
+			{% if tag_counter %}
+				{% for tag, counter in tag_counter.items %}
+					{% if tag in article.tag.all %}
+						<a href="/blog/articles/tag/{{ tag.id }}">{{ tag }}<sup>{{ counter }}</sup></a>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</div>
+		
+		<div class="article_time row">
+			日期：<a href="/blog/articles/date/{{ article.date_time | date:"Y/m/d" }}"> {{ article.date_time | date:"Y-m-d" }}</a>
+		</div>
+	</div>
+	
+	<div class="article_content">
+		{{ article.content | custom_markdown }}
+	</div>
+</div>
+{% endblock %}

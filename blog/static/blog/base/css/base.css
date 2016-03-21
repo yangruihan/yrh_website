@@ -1,0 +1,11 @@
+.blog_body {
+	margin-top: 2em;
+	margin-left: 2em;
+	margin-right: 2em;
+	margin-bottom: 1em;
+	width: 94%;
+	overflow: hidden;
+	padding-bottom: 1em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}

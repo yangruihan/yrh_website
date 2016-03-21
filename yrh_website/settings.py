@@ -139,6 +139,10 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 SESSION_SAVE_EVERY_REQUEST = True
 
+SESSION_COOKIE_AGE= 60 * 30 # 30分钟
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False # 会话cookie可以在用户浏览器中保持有效期。True：关闭浏览器，则Cookie失效
+
 # 使得 session cookie 被标记上 secure 标记,从而只能传输在 HTTPS 下
 # SESSION_COOKIE_SECURE = True 
 

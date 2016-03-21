@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static "blog/base/css/right_part.css" %}">
+
+<div class="blog_filter">
+	<div class="blog_filter_logo">分类 | 标签</div>
+	<div class="blog_filter_category">
+		<div class="filter_category_logo filter_logo">分类</div>
+		<div class="blog_categories">
+			{% if category_counter %}
+				{% for category, counter in category_counter.items %}
+					<div class="blog_category_name"><a href="/blog/articles/category/{{ category.id }}"%}">{{ category }}<sup>{{ counter }}</sup></a></div>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+	<div class="blog_filter_tag">
+		<div class="filter_tag_logo filter_logo">标签</div>
+		<ul class="tag_clearfix">
+			{% if tag_counter %}
+				{% for tag, counter in tag_counter.items %}
+					<li><a href="/blog/articles/tag/{{ tag.id }}">{{ tag }}<sup>{{ counter }}</sup></a></li>
+				{% endfor %}
+			{% endif %}
+		</ul>
+	</div>
+</div>

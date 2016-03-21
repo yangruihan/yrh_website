@@ -96,10 +96,12 @@
 
 .function_header .header_left ul li a:hover {
     text-decoration: underline;
+    color: #215583;
 }
 
 .function_header .header_left ul li a {
     height: 100%;
     display: block;
     text-align: center;
+    transition: color 0.3s;
 }

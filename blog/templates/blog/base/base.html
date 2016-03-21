@@ -1,0 +1,13 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static "blog/base/css/base.css" %}">
+
+<div class="blog_body">
+	{% block left_part %}
+	{% endblock left_part %}
+
+    {% include "blog/base/right_part.html" %}
+</div>
+{% endblock %}
