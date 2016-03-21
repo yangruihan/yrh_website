@@ -12,10 +12,11 @@
 {% block left_part %}
 <div class="article">
 	<div class="article_title">
-		<div class="article_logo">新建博文</div>
+		<div class="article_logo">新建文章</div>
 	</div>
 	
-	<form action="/blog/do_create_article" method="post" id="new_article_form">
+	<form action="/blog/do_create_article/" method="post" id="new_article_form">
+		{% csrf_token %}
 		<div class="new_article_content">
 			<div class="bs">
 				<style scoped>
@@ -24,7 +25,7 @@
 				
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1">标题</span>
-					<input type="text" class="form-control" aria-describedby="basic-addon1" name="title">
+					<input type="text" class="form-control" aria-describedby="basic-addon1" name="title" id="article_title">
 				</div>
 				
 				<div class="btn-group">
@@ -40,25 +41,34 @@
 		     		</ul>
 			   	</div>
 			   	
+			   	<!-- 用于存储分类信息的input标签 -->
+			   	<input type="hidden" name="category" id="category_store">
+			   	
 			   	<button type="button" class="btn btn-default" id="new_category" data-toggle="modal"  data-target="#new_category_modal">新建分类</button>
 			   	<div class="alert alert-success" role="alert" hidden="true" id="new_category_suc_message"></div>
 			   	<div class="alert alert-danger" role="alert" hidden="true" id="new_category_error_message"></div>
 			   	
 			   	<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1">标签</span>
-					<input type="text" class="form-control" aria-describedby="basic-addon1" name="tag" placeholder="每个标签之间用英文 ' ; ' 分隔">
+					<input type="text" class="form-control" id="article_tag" aria-describedby="basic-addon1" name="tag" placeholder="每个标签之间用英文 ' ; ' 分隔，每篇文章最多 5 个标签，不存在的标签将被自动创建，可以为空">
 				</div>
 				
 				<div class="article_content_area">
 					<style scoped>
 						@import "//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
 					</style>
-					<textarea class="article_content" id="article_content" name="article_content"></textarea>
+					<textarea class="article_content" id="article_content"></textarea>
 				</div>
+				
+				<!-- 用于存储文章内容的input标签 -->
+				<input type="hidden" name="content" id="content_store">
 											
+				<div class="alert alert-danger" role="alert" hidden="true" id="new_article_error_message"></div>
+				
 				<button type="button" class="btn btn-primary" id="btn_submit">提 交 </button>
 				
 				<button type="button" class="btn btn-danger" id="btn_cancel">取 消</button>
+				
 				
 				<!-- 模态框（Modal） -->
 				<div class="modal fade" id="new_category_modal" tabindex="-1" role="dialog" 
@@ -86,7 +96,7 @@
 				               data-dismiss="modal">关闭
 				            </button>
 				            <button type="button" class="btn btn-primary" id="btn_new_category">
-				               	提交更改
+				               	新建
 				            </button>
 				         </div>
 				      </div>

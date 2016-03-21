@@ -5,10 +5,9 @@ from django.shortcuts import render, get_object_or_404
 from .models import Article
 from .models import Category
 from .models import Tag
-from django.template.context_processors import request
-from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from django.core.exceptions import ObjectDoesNotExist
+from django.http.response import HttpResponse
 
 def get_category_counter(user):
     """
@@ -38,6 +37,9 @@ def get_tag_counter(user):
 
 @login_required(login_url='/login')
 def index_view(request):
+    """
+    博客主页
+    """
     user = request.user
     articles = Article.objects.filter(user=user).order_by('date_time')
     paginator = Paginator(articles, 10)  # 每页显示个数
@@ -63,6 +65,9 @@ def index_view(request):
 
 @login_required(login_url='/login')
 def detail_view(request, article_id):
+    """
+    博文页面
+    """
     user = request.user
     article = get_object_or_404(Article, pk=article_id, user=user)
     
@@ -71,12 +76,16 @@ def detail_view(request, article_id):
     
     # 获得使用到的标签
     tag_counter = get_tag_counter(user)
+    
     return render(request, 'blog/article_detail.html', {'article': article,
                                                         'category_counter': category_counter,
                                                         'tag_counter': tag_counter})
 
 @login_required(login_url='/login')
 def new_article_view(request):
+    """
+    新建博文页面
+    """
     user = request.user
     # 统计分类中文章的个数
     category_counter = get_category_counter(user)
@@ -89,6 +98,9 @@ def new_article_view(request):
 @csrf_protect 
 @login_required(login_url='/login')
 def do_new_category(request):
+    """
+    新建分类
+    """
     user = request.user
     try:
         category_name = request.POST['category_name']
@@ -104,3 +116,47 @@ def do_new_category(request):
     except KeyError as e:
         print(e)
         return HttpResponse('fail')
+
+@csrf_protect 
+@login_required(login_url='/login')    
+def do_create_article(request):
+    """
+    新建文章
+    """
+    user = request.user
+    try:
+        title = request.POST['title']
+        category_name = request.POST['category']
+        tag_str = request.POST['tag']
+        content = request.POST['content']
+        
+        category = Category.objects.get(user=user,
+                                        category_name=category_name)
+        
+        article = Article(user=user,
+                          title=title,
+                          category=category,
+                          content=content)
+        
+        if tag_str != '':
+            tag_names = tag_str.strip().split(';')
+            for tag_name in tag_names:
+                tag = Tag.objects.get(user=user,
+                                      tag_name=tag_name)
+                article.tag.add(tag)
+        
+        article.save()
+        
+        # 统计分类中文章的个数
+        category_counter = get_category_counter(user)
+        
+        # 获得使用到的标签
+        tag_counter = get_tag_counter(user)
+        
+        return render(request, 'blog/article_detail.html', {'article': article,
+                                                            'category_counter': category_counter,
+                                                            'tag_counter': tag_counter,
+                                                            'message': '新建文章成功'})
+    except Exception as e:
+        print(e)
+    

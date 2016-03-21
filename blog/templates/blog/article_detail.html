@@ -11,6 +11,15 @@
 {% endblock %}
 
 {% block left_part %}
+<div class="bs">
+	<style scoped>
+		@import "{% static "bootstrap/css/bootstrap.min.css" %}"
+	</style>
+	{% if message %}
+	<div class="alert alert-success" role="alert" id="new_article_suc_message">{{ message }}</div>
+	{% endif %}
+</div>
+
 <div class="article">
 	<div class="article_title">
 		<div class="article_logo">{{ article.title }}</div>
@@ -47,3 +56,8 @@
 	</div>
 </div>
 {% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+<script type="text/javascript" src="{% static "blog/js/article_detail.js" %}"></script>
+{% endblock scripts %}
