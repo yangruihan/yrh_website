@@ -159,4 +159,29 @@ def do_create_article(request):
                                                             'message': '新建文章成功'})
     except Exception as e:
         print(e)
+        
+
+@login_required(login_url='/login')
+def do_show_articles_by_category(request, category_id):
+    user = request.user
+    articles = Article.objects.filter(user=user,
+                                      category__id=category_id).order_by('date_time')
+    paginator = Paginator(articles, 10)  # 每页显示个数
     
+    # 统计分类中文章的个数
+    category_counter = get_category_counter(user)
+    
+    # 获得使用到的标签
+    tag_counter = get_tag_counter(user)
+    
+    page = request.GET.get('page')
+    
+    try:
+        article_list = paginator.page(page)
+    except PageNotAnInteger:
+        article_list = paginator.page(1)
+    except EmptyPage:
+        article_list = paginator.paginator(paginator.num_pages)
+    return render(request, 'blog/index.html', {'articles': articles,
+                                               'category_counter': category_counter,
+                                               'tag_counter': tag_counter})

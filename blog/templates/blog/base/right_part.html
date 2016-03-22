@@ -9,7 +9,7 @@
 		<div class="blog_categories">
 			{% if category_counter %}
 				{% for category, counter in category_counter.items %}
-					<div class="blog_category_name"><a href="/blog/articles/category/{{ category.id }}"%}">{{ category }}<sup>{{ counter }}</sup></a></div>
+					<div class="blog_category_name"><a href="/blog/articles/category/{{ category.id }}/"%}">{{ category }}<sup>{{ counter }}</sup></a></div>
 				{% endfor %}
 			{% endif %}
 		</div>
@@ -19,7 +19,7 @@
 		<ul class="tag_clearfix">
 			{% if tag_counter %}
 				{% for tag, counter in tag_counter.items %}
-					<li><a href="/blog/articles/tag/{{ tag.id }}">{{ tag }}<sup>{{ counter }}</sup></a></li>
+					<li><a href="/blog/articles/tag/{{ tag.id }}/">{{ tag }}<sup>{{ counter }}</sup></a></li>
 				{% endfor %}
 			{% endif %}
 		</ul>

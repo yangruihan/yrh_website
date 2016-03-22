@@ -25,6 +25,16 @@
     display:block;
 }
 
+.myblogs .myblogs_title .myblogs_logo a:hover {
+    color: #215583;
+}
+
+.myblogs .myblogs_title .myblogs_logo a {
+    text-decoration: none;
+    transition: color 0.3s;
+    color: #fff;
+}
+
 .myblogs .myblogs_title .myblogs_new_article {
     float: right;
     display:block;
