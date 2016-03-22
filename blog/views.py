@@ -25,14 +25,10 @@ def get_tag_counter(user):
     """
     获得某用户博文标签及其该标签下文章个数
     """
-    articles = Article.objects.filter(user=user).order_by('date_time')
     tag_counter = dict()
-    for article in articles:
-        for tag in article.tag.all():
-            if tag not in tag_counter:
-                tag_counter[tag] = 1
-            else:
-                tag_counter[tag] += 1
+    tags = Tag.objects.filter(user=user)
+    for tag in tags:
+        tag_counter[tag] = tag.article_set.count()
     return tag_counter
 
 @login_required(login_url='/login')
@@ -58,7 +54,7 @@ def index_view(request):
         article_list = paginator.page(1)
     except EmptyPage:
         article_list = paginator.paginator(paginator.num_pages)
-    return render(request, 'blog/index.html', {'articles': articles,
+    return render(request, 'blog/index.html', {'article_list': article_list,
                                                'category_counter': category_counter,
                                                'tag_counter': tag_counter})
     
@@ -182,7 +178,7 @@ def do_show_articles_by_category(request, category_id):
         article_list = paginator.page(1)
     except EmptyPage:
         article_list = paginator.paginator(paginator.num_pages)
-    return render(request, 'blog/index.html', {'articles': articles,
+    return render(request, 'blog/index.html', {'article_list': article_list,
                                                'category_counter': category_counter,
                                                'tag_counter': tag_counter})
     
@@ -208,6 +204,6 @@ def do_show_articles_by_tag(request, tag_id):
         article_list = paginator.page(1)
     except EmptyPage:
         article_list = paginator.paginator(paginator.num_pages)
-    return render(request, 'blog/index.html', {'articles': articles,
+    return render(request, 'blog/index.html', {'article_list': article_list,
                                                'category_counter': category_counter,
                                                'tag_counter': tag_counter})

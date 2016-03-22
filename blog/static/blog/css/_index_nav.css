@@ -1,0 +1,70 @@
+#page-nav {
+  /*background: #fafafa;*/
+  background: #F2F2F2;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 0 0 5px 5px;
+}
+#page-nav a {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+}
+#page-nav a {
+  color: #2ca6cb;
+}
+#page-nav a:hover {
+  background: #ccc;
+  color: #4682b4;
+}
+#page-nav .prev {
+  float: left;
+  -webkit-transition: border-left 0.5s;
+  -moz-transition: border-left 0.5s;
+  -o-transition: border-left 0.5s;
+  -ms-transition: border-left 0.5s;
+  transition: border-left 0.5s;
+}
+#page-nav .prev span:before {
+  font-family: "FontAwesome";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f053";
+  padding-right: 0.5em;
+}
+#page-nav .next {
+  float: right;
+}
+#page-nav .next span:before {
+  font-family: "FontAwesome";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f054";
+  padding-left: 0.5em;
+}
+#page-nav .page-number {
+  display: none;
+  padding: 0.5em 1em;
+}
+@media only screen and (min-width: 768px) {
+  #page-nav .page-number {
+    display: inline-block;
+  }
+}
+#page-nav .current {
+  color: #b8b8b8;
+  font-weight: bold;
+}
+#page-nav .space {
+  color: #2ca6cb;
+}
+
+#page-nav .prev_disable_btn {
+  float: left;
+  color: #B8B8B8;
+}
+
+#page-nav .next_disable_btn {
+  float: right;
+  color: #B8B8B8;
+}

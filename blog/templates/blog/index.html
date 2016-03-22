@@ -16,8 +16,8 @@
 		<div class="myblogs_new_article"><a href="/blog/new_article/">写文章</a></div>
 	</div>
 	<div class="myblogs_container">
-		{% if articles %}
-			{% for article in articles %}
+		{% if article_list %}
+			{% for article in article_list %}
 				<section class="myblog_content">
 					<a href="{% url "article_detail"  article.id %}">
 						<h1 class="myblog_title">{{ article.title }}</h1>
@@ -27,6 +27,89 @@
 				</section>
 			{% endfor %}
 		{% endif %}
+		
+ 		<div class="bs">
+			<style scoped>
+				@import "{% static "blog/css/_index_nav.css" %}"
+			</style>
+			{% if article_list.object_list and article_list.paginator.num_pages > 1 %}
+			<nav id="page-nav">
+				{% if article_list.has_previous %}	
+			 	   <a class="extend prev" rel="prev" href="?page={{ article_list.previous_page_number }}">&laquo; 上一页</a>
+			    {% else %}
+				    <a class="prev_disable_btn" rel="prev" href="javascript:void(0);">&laquo; 上一页</a>
+			    {% endif %}
+			    {% if article_list.paginator.num_pages < 5 %}
+				    {% for page in article_list.paginator.page_range %}
+				    	{% if page = article_list.number %}
+				    	<span class="page-number current">{{ page }}</span>
+				    	{% else %}
+				    	<a class="page-number" href="?page={{ page }}">{{ page }}</a>
+				    	{% endif %}
+				    {% endfor %}
+			    {% else %}
+			    	{% if article_list.number = 1 %}
+				    	<span class="page-number current">{{ article_list.number }}</span>
+				    	<a class="page-number" href="?page={{ article_list.number|add:1 }}">{{ article_list.number|add:1 }}</a>
+				    	<a class="page-number" href="?page={{ article_list.number|add:2 }}">{{ article_list.number|add:2 }}</a>
+				    	<a class="page-number" href="?page={{ article_list.number|add:3 }}">{{ article_list.number|add:3 }}</a>
+				    	<span class="space">&hellip;</span>
+				    	<a class="page-number" href="?page={{ article_list.paginator.num_pages }}">{{ article_list.paginator.num_pages }}</a>
+				    {% elif article_list.number = 2 %}
+				    	<a class="page-number" href="?page={{ article_list.number|add:-1 }}">{{ article_list.number|add:-1 }}</a>
+				    	<span class="page-number current">{{ article_list.number }}</span>
+				    	<a class="page-number" href="?page={{ article_list.number|add:1 }}">{{ article_list.number|add:1 }}</a>
+				    	<a class="page-number" href="?page={{ article_list.number|add:2 }}">{{ article_list.number|add:2 }}</a>
+				    	<span class="space">&hellip;</span>
+				    	<a class="page-number" href="?page={{ article_list.paginator.num_pages }}">{{ article_list.paginator.num_pages }}</a>
+				    {% elif article_list.number = 3 %}
+				    	<a class="page-number" href="?page={{ article_list.number|add:-2 }}">{{ article_list.number|add:-2 }}</a>
+				    	<a class="page-number" href="?page={{ article_list.number|add:-1 }}">{{ article_list.number|add:-1 }}</a>
+				    	<span class="page-number current">{{ article_list.number }}</span>
+				    	<a class="page-number" href="?page={{ article_list.number|add:1 }}">{{ article_list.number|add:1 }}</a>
+				    	<span class="space">&hellip;</span>
+				    	<a class="page-number" href="?page={{ article_list.paginator.num_pages }}">{{ article_list.paginator.num_pages }}</a>
+			    	{% elif article_list.number = article_list.paginator.num_pages %}
+				    	<a class="page-number" href="?page=1">1</a>
+				    	<span class="space">&hellip;</span>
+				    	<a class="page-number" href="?page={{ article_list.number|add:-3 }}">{{ article_list.number|add:-3 }}</a>
+				    	<a class="page-number" href="?page={{ article_list.number|add:-2 }}">{{ article_list.number|add:-2 }}</a>
+				    	<a class="page-number" href="?page={{ article_list.number|add:-1 }}">{{ article_list.number|add:-1 }}</a>
+				    	<span class="page-number current">{{ article_list.number }}</span>
+				    {% elif article_list.number = article_list.paginator.num_pages|add:-1 %}
+				    	<a class="page-number" href="?page=1">1</a>
+				    	<span class="space">&hellip;</span>
+				    	<a class="page-number" href="?page={{ article_list.number|add:-2 }}">{{ article_list.number|add:-2 }}</a>
+				    	<a class="page-number" href="?page={{ article_list.number|add:-1 }}">{{ article_list.number|add:-1 }}</a>
+				    	<span class="page-number current">{{ article_list.number }}</span>
+				    	<a class="page-number" href="?page={{ article_list.number|add:1 }}">{{ article_list.number|add:1 }}</a>
+				    {% elif article_list.number = article_list.paginator.num_pages|add:-2 %}
+				    	<a class="page-number" href="?page=1">1</a>
+				    	<span class="space">&hellip;</span>
+				    	<a class="page-number" href="?page={{ article_list.number|add:-2 }}">{{ article_list.number|add:-2 }}</a>
+				    	<span class="page-number current">{{ article_list.number }}</span>
+				    	<a class="page-number" href="?page={{ article_list.number|add:1 }}">{{ article_list.number|add:1 }}</a>
+				    	<a class="page-number" href="?page={{ article_list.number|add:2 }}">{{ article_list.number|add:2 }}</a>
+			    	{% else %}
+				    	<a class="page-number" href="?page=1">1</a>
+				    	<span class="space">&hellip;</span>
+				    	<a class="page-number" href="?page={{ article_list.number|add:-1 }}">{{ article_list.number|add:-1 }}</a>
+				    	<span class="page-number current">{{ article_list.number }}</span>
+				    	<a class="page-number" href="?page={{ article_list.number|add:1 }}">{{ article_list.number|add:1 }}</a>
+				    	<span class="space">&hellip;</span>
+				    	<a class="page-number" href="?page={{ article_list.paginator.num_pages }}">{{ article_list.paginator.num_pages }}</a>
+			    	{% endif %}
+			    {% endif %}
+			      
+			    {% if article_list.has_next %}
+				    <a class="extend next" rel="next" href="?page={{ article_list.next_page_number }}">下一页 &raquo;</a>
+			    {% else %}
+				    <a class="next_disable_btn" rel="next" href="javascript:void(0);">下一页 &raquo;</a>
+			    {% endif %}
+	 		</nav>
+	 		{% endif %}
+ 		</div>
+ 		
 	</div>
 </div>
 {% endblock %}
