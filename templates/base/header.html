@@ -14,9 +14,6 @@
             <li class="user">
                 欢迎您，{{ request.user.username }}
             </li>
-            <li class="index">
-                <a href="/">首页</a>
-            </li>
             <li class="login">
                 <a href="#">个人主页</a>
             </li>
@@ -28,9 +25,6 @@
     {% else %}
     <div class="header_right">
         <ul class="header_right_ul">
-            <li class="index">
-                <a href="/">首页</a>
-            </li>
             <li class="login">
                 <a href="/login">登录</a>
             </li>
@@ -44,6 +38,7 @@
 <div class="function_header" id="function_header">
     <div class="header_left">
         <ul>
+            <li class="index"><a href="/">首页</a></li>
             <li><a href="/blog/">博客</a></li>
             <li><a href="/dailytask/">每日任务</a></li>
             <li><a href="#">更多</a></li>

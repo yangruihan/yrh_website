@@ -1,0 +1,44 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+管理博客
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static "blog/css/admin.css" %}">
+{% endblock styles %}
+
+{% block body %}
+<div class="blog_admin">
+    <div class="blog_admin_body">
+        <div class="blog_admin_title">
+            <div class="blog_admin_log">
+                <a href="/blog/admin/">管理博客</a>
+            </div>
+
+            <div class="tag blog_admin_articles">
+                <a href="javascript:void(0);">文章</a>
+            </div>
+
+            <div class="tag blog_admin_articles">
+                <a href="javascript:void(0);">分类</a>
+            </div>
+
+            <div class="tag blog_admin_articles">
+                <a href="javascript:void(0);">标签</a>
+            </div>
+
+            <div class="back_to_index">
+                <a href="/blog/index/">返回</a>
+            </div>
+        </div>
+
+        <div class="blog_admin_content">
+            <div class="content">
+                页面正在建设中，尚未完成...
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+.blog_admin {
+    margin-top: 2em;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-bottom: 1em;
+    width: 94%;
+    overflow: hidden;
+    padding-bottom: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.blog_admin_body {
+    float: left;
+    width: 100%;
+    /*padding-bottom: 2em;*/
+    background-color: #fff;
+    /*background-color: #EBF2F8;*/
+    border-radius: 5px;
+    box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
+}
+
+.blog_admin .blog_admin_title {
+    border-radius: 5px 5px 0 0;
+    font-size: 20px;
+    background-color: #3AA6C1;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 2em;
+    color: #fff;
+    display:block;
+}
+
+.blog_admin .blog_admin_title .blog_admin_log {
+    float: left;
+    display:block;
+}
+
+.blog_admin .blog_admin_title .tag {
+    margin-left: 1em;
+    float: left;
+    display:block;
+}
+
+.blog_admin .blog_admin_title .back_to_index {
+    float: right;
+    display:block;
+}
+
+.blog_admin .blog_admin_title a:hover {
+    color: #215583;
+}
+
+.blog_admin .blog_admin_title a {
+    text-decoration: none;
+    transition: color 0.3s;
+    color: #fff;
+}
+
+.blog_admin .blog_admin_content {
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    /*margin-bottom: 0.125em;*/
+    font-size: 100%;
+}
+
+.blog_admin .blog_admin_content .content {
+    margin: 1em;
+}

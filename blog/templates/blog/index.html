@@ -13,6 +13,7 @@
 <div class="myblogs">
 	<div class="myblogs_title">
 		<div class="myblogs_logo"><a href="/blog/index/">我的博文</a></div>
+		<div class="myblogs_admin"><a href="/blog/admin/">管理</a></div>
 		<div class="myblogs_new_article"><a href="/blog/new_article/">写文章</a></div>
 	</div>
 	<div class="myblogs_container">
@@ -27,14 +28,14 @@
 				</section>
 			{% endfor %}
 		{% endif %}
-		
+
  		<div class="bs">
 			<style scoped>
 				@import "{% static "blog/css/_index_nav.css" %}"
 			</style>
 			{% if article_list.object_list and article_list.paginator.num_pages > 1 %}
 			<nav id="page-nav">
-				{% if article_list.has_previous %}	
+				{% if article_list.has_previous %}
 			 	   <a class="extend prev" rel="prev" href="?page={{ article_list.previous_page_number }}">&laquo; 上一页</a>
 			    {% else %}
 				    <a class="prev_disable_btn" rel="prev" href="javascript:void(0);">&laquo; 上一页</a>
@@ -100,7 +101,7 @@
 				    	<a class="page-number" href="?page={{ article_list.paginator.num_pages }}">{{ article_list.paginator.num_pages }}</a>
 			    	{% endif %}
 			    {% endif %}
-			      
+
 			    {% if article_list.has_next %}
 				    <a class="extend next" rel="next" href="?page={{ article_list.next_page_number }}">下一页 &raquo;</a>
 			    {% else %}
@@ -109,7 +110,7 @@
 	 		</nav>
 	 		{% endif %}
  		</div>
- 		
+
 	</div>
 </div>
 {% endblock %}

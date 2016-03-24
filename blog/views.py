@@ -217,3 +217,7 @@ def do_show_articles_by_tag(request, tag_id):
     return render(request, 'blog/index.html', {'article_list': article_list,
                                                'category_counter': category_counter,
                                                'tag_counter': tag_counter})
+
+@login_required(login_url='/login')
+def admin_view(request):
+    return render(request, 'blog/admin.html')
