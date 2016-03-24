@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    每日任务  
+    每日任务
 {% endblock title %}
 
 {% block styles %}
@@ -50,7 +50,7 @@
 	                <td><button id="btn_add_task_1" class="btn_add_task">增加</button></td>
 	                <td><button id="btn_delete_task_1" class="btn_delete_task">删除</button></td>
 	            </tr>
-	            {% endif %}    
+	            {% endif %}
 	        </table>
 	    </div>
 	    <div class="completed_task_log task_logo">已完成</div>
@@ -68,20 +68,20 @@
                 <td align="center" class="td_task_num"><label for="label_task_{{ forloop.counter }}" id="label_task">{{ forloop.counter }}</td>
                 <td><div id="div_task_content_{{ forloop.counter }}" class="div_task_content">{{ completed_task.content }}</div></td>
                 <td><div id="div_task_done_date_{{ forloop.counter }}" class="div_task_done_date">{{ completed_task.done_date|date:"Y-m-d H:i:s" }}</div></td>
-            </tr>    
+            </tr>
             {% endfor %}
         </table>
     </div>
 	</div>
-	
+
 	<div class="task_statistics">
 		<div class="task_statistics_logo">任务统计</div>
-		
+
 		<div class="task_statistics_calendar">
 			<div id="cal-heatmap">
 			</div>
 		</div>
-		
+
 		<div class="task_statistics_data">
 			<div class="completed_tasks_num_last_year">
 				<span class="text-muted">一年内完成的任务数</span>
@@ -90,16 +90,16 @@
 			</div>
 			<div class="longest_streak_days">
 				<span class="text-muted">最长坚持时间</span>
-				<span class="longest_streak_days_number"></span>
+				<span class="longest_streak_days_number">0天</span>
 				<span class="during_date_string text-muted"></span>
 			</div>
 			<div class="current_streak_days">
 				<span class="text-muted">目前坚持时间</span>
-				<span class="current_streak_days_number"></span>
+				<span class="current_streak_days_number">0天</span>
 				<span class="during_date_string text-muted"></span>
 			</div>
 		</div>
-		
+
 		<div class="task_statistics_detail">
 			<div class="task_statistics_detail_logo">任务完成情况</div>
 			<div class="task_statistics_detail_wrapper">
@@ -113,7 +113,7 @@
 					</ul>
 				</div>
 			</div>
-		
+
 			<div class="task_statistics_detail_tasks" id="task_statistics_detail_tasks">
 				<div class="task_statistics_detail_number" id="task_statistics_detail_number">共完成 0 项任务</div>
 			</div>

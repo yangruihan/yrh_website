@@ -25,6 +25,21 @@
     display:block;
 }
 
+.article .article_title .back_to_index {
+    float: right;
+    display:block;
+}
+
+.article .article_title .back_to_index a:hover {
+    color: #215583;
+}
+
+.article .article_title .back_to_index a {
+    text-decoration: none;
+    transition: color 0.3s;
+    color: #fff;
+}
+
 .article .article_category_tag_time {
 	padding: 0.5em 1.8em;
 	background: #50BCD8;

@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import HttpResponse
 
+
 def get_category_counter(user):
     """
     获得某用户博文目录及其该目录下文章个数
@@ -31,6 +32,7 @@ def get_tag_counter(user):
         tag_counter[tag] = tag.article_set.count()
     return tag_counter
 
+
 @login_required(login_url='/login')
 def index_view(request):
     """
@@ -39,15 +41,15 @@ def index_view(request):
     user = request.user
     articles = Article.objects.filter(user=user).order_by('date_time')
     paginator = Paginator(articles, 10)  # 每页显示个数
-    
+
     # 统计分类中文章的个数
     category_counter = get_category_counter(user)
-    
+
     # 获得使用到的标签
     tag_counter = get_tag_counter(user)
-    
+
     page = request.GET.get('page')
-    
+
     try:
         article_list = paginator.page(page)
     except PageNotAnInteger:
@@ -57,7 +59,7 @@ def index_view(request):
     return render(request, 'blog/index.html', {'article_list': article_list,
                                                'category_counter': category_counter,
                                                'tag_counter': tag_counter})
-    
+
 
 @login_required(login_url='/login')
 def detail_view(request, article_id):
@@ -66,16 +68,17 @@ def detail_view(request, article_id):
     """
     user = request.user
     article = get_object_or_404(Article, pk=article_id, user=user)
-    
+
     # 统计分类中文章的个数
     category_counter = get_category_counter(user)
-    
+
     # 获得使用到的标签
     tag_counter = get_tag_counter(user)
-    
+
     return render(request, 'blog/article_detail.html', {'article': article,
                                                         'category_counter': category_counter,
                                                         'tag_counter': tag_counter})
+
 
 @login_required(login_url='/login')
 def new_article_view(request):
@@ -85,13 +88,14 @@ def new_article_view(request):
     user = request.user
     # 统计分类中文章的个数
     category_counter = get_category_counter(user)
-    
+
     # 获得使用到的标签
     tag_counter = get_tag_counter(user)
     return render(request, 'blog/new_article.html', {'category_counter': category_counter,
                                                      'tag_counter': tag_counter})
 
-@csrf_protect 
+
+@csrf_protect
 @login_required(login_url='/login')
 def do_new_category(request):
     """
@@ -100,7 +104,7 @@ def do_new_category(request):
     user = request.user
     try:
         category_name = request.POST['category_name']
-        
+
         try:
             Category.objects.get(category_name=category_name)
             return HttpResponse('exist')
@@ -113,8 +117,9 @@ def do_new_category(request):
         print(e)
         return HttpResponse('fail')
 
-@csrf_protect 
-@login_required(login_url='/login')    
+
+@csrf_protect
+@login_required(login_url='/login')
 def do_create_article(request):
     """
     新建文章
@@ -125,37 +130,41 @@ def do_create_article(request):
         category_name = request.POST['category']
         tag_str = request.POST['tag']
         content = request.POST['content']
-        
+
         category = Category.objects.get(user=user,
                                         category_name=category_name)
-        
+
         article = Article(user=user,
                           title=title,
                           category=category,
                           content=content)
-        
+
+        article.save()
+
         if tag_str != '':
             tag_names = tag_str.strip().split(';')
             for tag_name in tag_names:
-                tag = Tag.objects.get(user=user,
-                                      tag_name=tag_name)
+                try:
+                    tag = Tag.objects.get(user=user,
+                                          tag_name=tag_name)
+                except ObjectDoesNotExist as e:
+                    tag = Tag.objects.create(user=user,
+                                             tag_name=tag_name)
                 article.tag.add(tag)
-        
-        article.save()
-        
+
         # 统计分类中文章的个数
         category_counter = get_category_counter(user)
-        
+
         # 获得使用到的标签
         tag_counter = get_tag_counter(user)
-        
+
         return render(request, 'blog/article_detail.html', {'article': article,
                                                             'category_counter': category_counter,
                                                             'tag_counter': tag_counter,
                                                             'message': '新建文章成功'})
     except Exception as e:
         print(e)
-        
+
 
 @login_required(login_url='/login')
 def do_show_articles_by_category(request, category_id):
@@ -163,15 +172,15 @@ def do_show_articles_by_category(request, category_id):
     articles = Article.objects.filter(user=user,
                                       category__id=category_id).order_by('date_time')
     paginator = Paginator(articles, 10)  # 每页显示个数
-    
+
     # 统计分类中文章的个数
     category_counter = get_category_counter(user)
-    
+
     # 获得使用到的标签
     tag_counter = get_tag_counter(user)
-    
+
     page = request.GET.get('page')
-    
+
     try:
         article_list = paginator.page(page)
     except PageNotAnInteger:
@@ -181,7 +190,8 @@ def do_show_articles_by_category(request, category_id):
     return render(request, 'blog/index.html', {'article_list': article_list,
                                                'category_counter': category_counter,
                                                'tag_counter': tag_counter})
-    
+
+
 @login_required(login_url='/login')
 def do_show_articles_by_tag(request, tag_id):
     user = request.user
@@ -189,15 +199,15 @@ def do_show_articles_by_tag(request, tag_id):
     articles = Article.objects.filter(user=user,
                                       tag=tag).order_by('date_time')
     paginator = Paginator(articles, 10)  # 每页显示个数
-    
+
     # 统计分类中文章的个数
     category_counter = get_category_counter(user)
-    
+
     # 获得使用到的标签
     tag_counter = get_tag_counter(user)
-    
+
     page = request.GET.get('page')
-    
+
     try:
         article_list = paginator.page(page)
     except PageNotAnInteger:
