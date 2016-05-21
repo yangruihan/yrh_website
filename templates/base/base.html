@@ -7,15 +7,18 @@
     <title>{% block title %}{% endblock title %}</title>
 
     <link rel="stylesheet" type="text/css" href="{% static "base/css/base.css" %}">
+
     {% block styles %}
     {% endblock styles %}
 
-    <script type="text/javascript" src="{% static "base/js/jQuery/jquery-1.12.1.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "base/js/jQuery/jquery-1.12.1.min.js" %}">
+    </script>
     <script type="text/javascript">
         $.ajaxSetup({
             data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
         });
     </script>
+</head>
 
 <body>
     {% include "base/header.html" %}
