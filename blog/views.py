@@ -106,7 +106,7 @@ def do_new_category(request):
         category_name = request.POST['category_name']
 
         try:
-            Category.objects.get(category_name=category_name)
+            Category.objects.get(user=user, category_name=category_name)
             return HttpResponse('exist')
         except ObjectDoesNotExist as e:
             category = Category(user=user,
